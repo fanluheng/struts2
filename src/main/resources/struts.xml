@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	<!-- 配置常量 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.locale" value="zh_CN"></constant>	
+	<!-- 
+	package : 目录，包，文件夹 
+    name:唯一标识，不能重复
+    namespace：包名，目录名
+    extends：继承   
+	-->
+	<package name="root" namespace="/" extends="myPackage"><!-- /:表示当前项目下的action -->
+	  <action name="login" class="com.zhiyou100.struts2.action.LoginAction"><!-- 和前端页面对应，相当于映射 -->
+	    <result name="input">/index.jsp</result>
+	    <result name="success" type="chain"><!-- /WEB-INF/pages/suc.jsp -->
+	    <param name="namespace">/pages</param>
+	    <param name="actionName">hello</param>
+	    </result>
+	  </action>
+	</package>
+	
+	<package name="test" namespace="/pages" extends="struts-default">
+	  <action name="hello" class="com.zhiyou100.struts2.action.HelloAction">
+	    <result name="test">/WEB-INF/pages/test.jsp</result>
+	  </action>
+	</package>
+	
+	<package name="myPackage" extends="struts-default">
+	  <global-results>
+	    <result name="forward">/forward.jsp</result>
+	  </global-results>
+	</package>
+</struts>
